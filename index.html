@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#000000">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>Lista de Compras</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Cabeçalho -->
+  <header class="app-header">
+    <button id="menu-btn" class="icon-btn" aria-label="Abrir Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+    <h1 id="page-title">Para Comprar</h1>
+    <button id="import-btn" class="icon-btn" aria-label="Colar Lista" title="Colar lista do Bloco de Notas">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Menu Lateral (Drawer) -->
+  <div id="drawer-overlay" class="overlay hidden"></div>
+  <aside id="side-menu" class="side-menu">
+    <div class="menu-header">
+      <h2>Menu</h2>
+      <button id="close-menu-btn" class="icon-btn">&times;</button>
+    </div>
+    <nav class="menu-nav">
+      <button class="nav-item active" data-tab="to-buy">
+        <span>🛒 Para Comprar</span>
+        <span id="badge-to-buy" class="badge">0</span>
+      </button>
+      <button class="nav-item" data-tab="bought">
+        <span>✅ Já Comprados</span>
+        <span id="badge-bought" class="badge">0</span>
+      </button>
+    </nav>
+    <div class="menu-footer">
+      <button id="open-import-menu" class="secondary-btn">📋 Colar lista em lote</button>
+    </div>
+  </aside>
+
+  <!-- Área Principal da Lista -->
+  <main class="content">
+    <p id="section-hint" class="hint-text">Toque no item para marcar como comprado</p>
+    <ul id="shopping-list" class="shopping-list"></ul>
+    <div id="empty-state" class="empty-state hidden">
+      <p>Nenhum item por aqui.</p>
+    </div>
+  </main>
+
+  <!-- Barra Inferior Fixa (Para adicionar itens com uma mão) -->
+  <footer id="add-bar" class="bottom-bar">
+    <form id="add-form" class="add-form">
+      <input 
+        type="text" 
+        id="item-input" 
+        placeholder="Adicionar item (ex: Arroz 5kg)..." 
+        autocomplete="off"
+      >
+      <button type="submit" class="add-btn" aria-label="Adicionar">+</button>
+    </form>
+  </footer>
+
+  <!-- Modal de Importação em Lote -->
+  <div id="import-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Colar Lista</h2>
+      <p class="hint-text">Cole os itens do seu bloco de notas (um por linha):</p>
+      <textarea id="bulk-textarea" rows="8" placeholder="Arroz&#10;Feijão&#10;Café&#10;Detergente"></textarea>
+      <div class="modal-actions">
+        <button id="cancel-import" class="secondary-btn">Cancelar</button>
+        <button id="confirm-import" class="primary-btn">Adicionar Todos</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
